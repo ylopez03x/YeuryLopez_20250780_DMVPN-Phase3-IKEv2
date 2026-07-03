@@ -3,6 +3,14 @@
 
 ---
 
+## Video de demostración
+
+[![Ver en YouTube](https://img.shields.io/badge/YouTube-Ver%20Video-red?logo=youtube)](https://youtu.be/462RfNMWNbk)
+
+**Enlace directo:** https://youtu.be/462RfNMWNbk
+
+---
+
 ## 1. Objetivo
 Configurar una VPN Hub and Spoke DMVPN Fase 3 con IKEv2 y OSPF. En la Fase 3, el Hub usa `ip nhrp redirect` y los Spokes usan `ip nhrp shortcut` para instalar rutas dinámicas directas entre Spokes sin pasar por el Hub. IKEv2 reemplaza a IKEv1 como mecanismo de negociación.
 
@@ -10,17 +18,8 @@ Configurar una VPN Hub and Spoke DMVPN Fase 3 con IKEv2 y OSPF. En la Fase 3, el
 
 ## 2. Topología
 
-```
-              [HUB] (LAN: 192.168.7.0/24)
-             /     \
-          [ISP]
-         /     \
-[SPOKE1]       [SPOKE2]
-(LAN:          (LAN:
-192.168.80.0)  192.168.78.0)
-```
 
-> 📸 **SCREENSHOT:** Insertar captura de la topología DMVPN completa en EVE-NG
+> <img width="940" height="589" alt="image" src="https://github.com/user-attachments/assets/33e4a6d6-8c70-4070-903e-f996efdcc2ee" />
 
 ---
 
@@ -105,7 +104,8 @@ Ejecutar en HUB:
 ```
 show dmvpn
 ```
-> 📸 **SCREENSHOT:** Insertar captura mostrando ambos Spokes en estado **UP**
+> <img width="488" height="447" alt="image" src="https://github.com/user-attachments/assets/14a39a99-b604-4166-a2fb-cc5aa2d8042f" />
+
 
 ### 6.2 Estado IKEv2 SA en HUB
 
@@ -113,7 +113,8 @@ Ejecutar en HUB:
 ```
 show crypto ikev2 sa
 ```
-> 📸 **SCREENSHOT:** Insertar captura mostrando sesiones IKEv2 en estado **READY** para cada Spoke
+> <img width="940" height="286" alt="image" src="https://github.com/user-attachments/assets/fe28033e-96d4-4b20-aef6-46800e4d348f" />
+
 
 ### 6.3 Estado OSPF en HUB
 
@@ -121,7 +122,8 @@ Ejecutar en HUB:
 ```
 show ip ospf neighbor
 ```
-> 📸 **SCREENSHOT:** Insertar captura mostrando ambos Spokes en estado **FULL**
+> <img width="940" height="134" alt="image" src="https://github.com/user-attachments/assets/54d9746a-a2e1-4ebe-a5fe-9c409300c199" />
+
 
 ### 6.4 Tabla de rutas en HUB
 
@@ -129,32 +131,17 @@ Ejecutar en HUB:
 ```
 show ip route
 ```
-> 📸 **SCREENSHOT:** Insertar captura mostrando rutas **O (OSPF)** hacia las LANs de los Spokes
+> <img width="940" height="458" alt="image" src="https://github.com/user-attachments/assets/7e14cdd8-2ce4-4722-94f0-c8e86c810f8e" />
 
-### 6.5 Túnel dinámico Spoke-to-Spoke
 
-Ejecutar en SPOKE1 después del ping:
-```
-show dmvpn
-```
-> 📸 **SCREENSHOT:** Insertar captura mostrando túnel dinámico directo hacia SPOKE2 — característica clave de Fase 3
-
-### 6.6 Demostración de conectividad
+### 6.5 Demostración de conectividad
 
 Ejecutar en Linux-SP1:
 ```
 ping -c 4 192.168.7.2
 ping -c 4 192.168.78.2
 ```
-> 📸 **SCREENSHOT:** Insertar captura del ping exitoso hacia LAN del HUB y LAN de SPOKE2
+> <img width="940" height="212" alt="image" src="https://github.com/user-attachments/assets/3e2d1cbd-ca28-4adb-8993-58b7106efc1e" />
+
 
 ---
-
-## 7. Archivos del repositorio
-
-| Archivo | Descripción |
-|---|---|
-| `YeuryLopez_20250780_Script_P8.txt` | Script de configuración |
-| `YeuryLopez_20250780_Informe_P8.pdf` | Documentación técnica en PDF |
-| `YeuryLopez_20250780_Links_P8.txt` | Enlace al video |
-| `README.md` | Este archivo |
